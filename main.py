@@ -12,7 +12,7 @@ pd.read_sql("""SELECT * FROM sqlite_master""", conn)
 # STEP 1
 # Replace None with your code
 df_boston = pd.read_sql("""
-    SELECT e.firstName, e.lastName, e.jobTitle
+    SELECT e.firstName, e.lastName
     FROM employees e
     JOIN offices o ON e.officeCode = o.officeCode
     WHERE o.city = 'Boston'
@@ -26,7 +26,6 @@ df_zero_emp = pd.read_sql("""
     LEFT JOIN employees e ON o.officeCode = e.officeCode
     WHERE e.employeeNumber IS NULL
 """, conn)
-
 # STEP 3
 # Replace None with your code
 df_employee = pd.read_sql("""
@@ -80,7 +79,6 @@ df_product_sold = pd.read_sql("""
     GROUP BY p.productCode, p.productName
     ORDER BY totalunits DESC
 """, conn)
-
 # STEP 8
 # Replace None with your code
 df_total_customers = pd.read_sql("""
@@ -121,6 +119,7 @@ df_under_20 = pd.read_sql("""
         GROUP BY od2.productCode
         HAVING COUNT(DISTINCT o2.customerNumber) < 20
     )
+    ORDER BY e.lastName, e.firstName
 """, conn)
 
 conn.close()
